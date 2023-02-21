@@ -1,0 +1,12 @@
+WITH recursive Date_Ranges AS (
+    select '2020-01-01' as Date
+   union all
+   select Date + interval 1 day
+   from Date_Ranges
+   where Date < '2022-02-20')
+SELECT 
+    `Date`,
+    SUBSTRING(`Date`,1,4) AS `Year`,
+	SUBSTRING(`Date`,6,2) AS `Month`,
+	QUARTER(`Date`) AS `Quarter`
+FROM Date_Ranges;
